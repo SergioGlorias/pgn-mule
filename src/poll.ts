@@ -1,4 +1,5 @@
-import { differenceInSeconds } from 'date-fns';
+import dayjs from 'dayjs';
+dayjs().format();
 import {
   minutesInactivityDie,
   minutesInactivitySlowDown,
@@ -45,10 +46,8 @@ export const pollURL = async (name: string, redis: Redis, zulip: Zulip) => {
   source = await redis.getSource(name); // in case it was deleted in the meantime
   if (source === undefined) return;
 
-  const secondsSinceUpdated = differenceInSeconds(
-    new Date(),
-    source.dateLastUpdated,
-  );
+  const secondsSinceUpdated = dayjs().diff(source.dateLastUpdated, 'seconds');
+
   source.dateLastUpdated = new Date();
   await redis.setSource(source);
 
@@ -60,7 +59,7 @@ export const pollURL = async (name: string, redis: Redis, zulip: Zulip) => {
     );
   }
 
-  const minutes = differenceInSeconds(new Date(), source.dateLastPolled) / 60.0;
+  const minutes = dayjs().diff(source.dateLastPolled, 'minutes');
   if (minutes >= minutesInactivityDie) {
     console.log(`${name} removed due to inactivity`);
     zulip.say(`${name} removed due to inactivity`);

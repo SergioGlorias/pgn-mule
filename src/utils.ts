@@ -1,5 +1,5 @@
 import request from 'request';
-import { Game, ChildNode, parsePgn, makePgn } from 'chessops/pgn.js';
+import { Game, ChildNode, parsePgn, makePgn } from 'chessops/pgn';
 import { promisify } from 'util';
 
 export interface Source {

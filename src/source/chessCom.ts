@@ -1,4 +1,4 @@
-import { makePgn, PgnNodeData, Game, Node } from 'chessops/pgn.js';
+import { makePgn, PgnNodeData, Game, Node } from 'chessops/pgn';
 import { parseUci } from 'chessops';
 import { userAgent } from '../config.js';
 import { Source, fetchJson, extendMainline, emptyHeaders } from '../utils.js';

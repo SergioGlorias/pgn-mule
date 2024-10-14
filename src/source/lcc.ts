@@ -1,4 +1,4 @@
-import { makePgn, PgnNodeData, Game as ChessGame, Node } from 'chessops/pgn.js';
+import { makePgn, PgnNodeData, Game as ChessGame, Node } from 'chessops/pgn';
 import {
   Source,
   fetchJson,
