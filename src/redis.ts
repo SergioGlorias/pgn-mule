@@ -1,11 +1,12 @@
+import { createClient } from 'redis';
 import { createHandyClient } from 'handy-redis';
 import { envOr, notEmpty, Replacements, Source } from './utils.js';
 
 export class Redis {
-  client = createHandyClient({
-    port: parseInt(envOr('REDIS_PORT', '6379')),
+  client = createClient({
+    database: parseInt(envOr('REDIS_DB', '1')),
     password: process.env.REDIS_PASSWORD || undefined,
-    db: process.env.REDIS_DB,
+    url: envOr('REDIS_URL', 'redis://127.0.0.1:6379')
   });
 
   setSource = async (s: Source) => {
